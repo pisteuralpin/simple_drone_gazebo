@@ -1,0 +1,15 @@
+drone_number: 6
+starting:
+  shape: square
+  spacing: 2.0 # meters
+  altitude: 10.0 # meters
+  center:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+
+sensors:
+  gps:
+    enabled: true
+    update_rate: 5.0 # Hz
+    precision: 1.5 # meters

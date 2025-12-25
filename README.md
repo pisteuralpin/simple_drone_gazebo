@@ -21,3 +21,8 @@ To launch the Gazebo simulation, use the following command:
 ```bash
 ros2 launch pisteur_drone_gazebo start_gz.launch.py
 ```
+
+To spawn drones in the simulation, run the following command:
+```bash
+ros2 launch pisteur_drone_gazebo drones.launch.py
+```
