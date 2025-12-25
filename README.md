@@ -1,4 +1,8 @@
 # Simple Drone - Gazebo integration package
+[![ROS2](https://img.shields.io/badge/ROS2-Jazzy-green)](https://docs.ros.org/en/jazzy/index.html)
+[![Gazebo](https://img.shields.io/badge/Gazebo-Harmonic-orange)](http://gazebosim.org/)
+[![License](https://img.shields.io/badge/License-GNU--3..0-blue)](#license)
+
 Simple Drone are ROS2 packages designed for simulating drones in a Gazebo environment. This package provides integration between the drone models and Gazebo simulator.
 
 Drone models from [NovoG93/sjtu_drone](https://github.com/NovoG93/sjtu_drone/tree/ros2)
