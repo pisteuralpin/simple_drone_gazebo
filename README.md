@@ -5,12 +5,11 @@ Drone models from [NovoG93/sjtu_drone](https://github.com/NovoG93/sjtu_drone/tre
 
 ## Associated packages
 - [pisteur_drone_description](https://github.com/pisteuralpin/pisteur_drone_description)
-- [pisteur_drone_gazebo](https://github.com/pisteuralpin/pisteur_drone_gazebo)
-- [pisteur_drone_control](https://github.com/pisteuralpin/pisteur_drone_control)
-- [pisteur_drone_bringup](https://github.com/pisteuralpin/pisteur_drone_bringup)
+- [pisteur_drone_gazebo](https://github.com/pisteuralpin/pisteur_drone_gazebo) (this package)
 
 ## Features
-- [ ] Gazebo bridges for drone control.
+- [x] Start Gazebo with a predefined world
+- [x] Spawn multiple drones models in the Gazebo simulation
 
 ## Tested configuration
 - ROS2 Kilted
