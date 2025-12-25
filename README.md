@@ -15,3 +15,9 @@ Drone models from [NovoG93/sjtu_drone](https://github.com/NovoG93/sjtu_drone/tre
 ## Tested configuration
 - ROS2 Kilted
 - Gazebo Harmonic
+
+# Usage
+To launch the Gazebo simulation, use the following command:
+```bash
+ros2 launch pisteur_drone_gazebo start_gz.launch.py
+```
