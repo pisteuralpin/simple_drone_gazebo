@@ -5,7 +5,7 @@ import os
 sl = SimpleLauncher(use_sim_time=True)
 sl.declare_arg('gui', True)
 sl.declare_arg('rviz', False)
-full_world = sl.find('pisteur_drone_gazebo', 'flat.sdf')
+full_world = sl.find('simple_drone_gazebo', 'flat.sdf')
 
 
 def launch_setup():
@@ -15,12 +15,12 @@ def launch_setup():
     if os.path.exists(full_world):
         sl.gz_launch(full_world, gz_args)
     else:
-        sl.gz_launch(sl.find('pisteur_drone_gazebo', 'world.sdf'), gz_args)
+        sl.gz_launch(sl.find('simple_drone_gazebo', 'world.sdf'), gz_args)
         sl.save_gz_world(full_world, 5.)
 
     # display in RViz
     if sl.arg('rviz'):
-        sl.rviz(sl.find('pisteur_drone_description', 'x3.rviz'))
+        sl.rviz(sl.find('simple_drone_description', 'x3.rviz'))
 
     return sl.launch_description()
 

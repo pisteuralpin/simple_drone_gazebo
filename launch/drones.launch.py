@@ -9,7 +9,7 @@ sl.declare_arg('gt', True, description = 'Whether to use ground truth localizati
 
 def launch_setup():
     
-    pkg_share_dir = get_package_share_directory('pisteur_drone_gazebo')
+    pkg_share_dir = get_package_share_directory('simple_drone_gazebo')
     config_file = pkg_share_dir + '/config/simulation.yaml'
     
     with open(config_file, 'r') as f:
@@ -39,7 +39,7 @@ def launch_setup():
         with sl.group(ns=ns):
 
             # robot state publisher
-            sl.robot_state_publisher('pisteur_drone_description', 'x3.urdf')
+            sl.robot_state_publisher('simple_drone_description', 'x3.urdf')
 
             # display thrusters in RViz
             sl.node('thruster_manager', 'publish_wrenches',
