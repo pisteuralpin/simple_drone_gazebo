@@ -8,8 +8,8 @@ Simple Drone are ROS2 packages designed for simulating drones in a Gazebo enviro
 Drone models by [OpenRobotics on Gazebo Fuel](https://app.gazebosim.org/OpenRobotics/fuel/models/X3%20UAV)
 
 ## Associated packages
-- [simple_drone_description](https://github.com/simplealpin/simple_drone_description)
-- [simple_drone_gazebo](https://github.com/simplealpin/simple_drone_gazebo) (this package)
+- [simple_drone_description](https://github.com/pisteuralpin/simple_drone_description)
+- [simple_drone_gazebo](https://github.com/pisteuralpin/simple_drone_gazebo) (this package)
 
 ## Features
 - [x] Start Gazebo with a predefined world
