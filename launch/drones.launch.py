@@ -1,4 +1,6 @@
 from simple_launch import SimpleLauncher, GazeboBridge
+from launch.actions import IncludeLaunchDescription, TimerAction
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
 import yaml
 import math
@@ -25,6 +27,8 @@ def launch_setup():
 
     drones = []
     n = int(math.ceil(math.sqrt(drone_number)))
+    
+    # Spawn drones in a grid
     for i in range(drone_number):
         row = i // n
         col = i % n
@@ -33,53 +37,13 @@ def launch_setup():
         z = center_z + altitude
         drones.append({'name': f'drone_{i}', 'x': x, 'y': y, 'z': z})
         
-    
-    for drone in drones:  
-        ns = drone['name']
-        with sl.group(ns=ns):
-
-            # robot state publisher
-            sl.robot_state_publisher('simple_drone_description', 'x3.urdf')
-
-            # display thrusters in RViz
-            sl.node('thruster_manager', 'publish_wrenches',
-                    parameters = {'control_frame': f'{ns}/base_link'})
-                        
-            # URDF spawner to Gazebo, defaults to relative robot_description topic
-            sl.spawn_gz_model(ns, spawn_args = f'-x {drone["x"]} -y {drone["y"]} -z {drone["z"]} -Y 0.'.split())
-                
-            # ROS-Gz bridges
-            bridges = []
-            gz_js_topic = GazeboBridge.model_prefix(ns) + '/joint_state'
-            bridges.append(GazeboBridge(gz_js_topic, 'joint_states', 'sensor_msgs/JointState', GazeboBridge.gz2ros))
+        drone_launch = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([pkg_share_dir, '/launch/spawn_drone.launch.py']),
+            launch_arguments={'x': str(x), 'y': str(y), 'z': str(z), 'ns': f'drone_{i}'}.items()
+        )
+        
+        sl.add_action(drone_launch)
             
-            # pose ground truth
-            bridges.append(GazeboBridge(f'/model/{ns}/pose',
-                                        'pose_gt', 'geometry_msgs/Pose', GazeboBridge.gz2ros))
-            
-            # imu
-            for imu in ('mpu', 'lsm'):
-                bridges.append(GazeboBridge(f'{ns}/{imu}',
-                            f'{imu}_raw', 'sensor_msgs/Imu', GazeboBridge.gz2ros))
-
-            # thrusters
-            for thr in range(1, 7):
-                thruster = f'thruster{thr}'
-                gz_thr_topic = f'/{ns}/{thruster}/cmd'
-                bridges.append(GazeboBridge(gz_thr_topic, f'cmd_{thruster}', 'std_msgs/Float64', GazeboBridge.ros2gz))
-                            
-            # ground truth to tf if requested
-            if sl.arg('gt'):
-                # odometry from Gz
-                bridges.append(GazeboBridge(f'/model/{ns}/odometry_with_covariance',
-                                        'odom', 'nav_msgs/Odometry', GazeboBridge.gz2ros, 'gz.msgs.Odometry'))
-
-                sl.node('pose_to_tf',parameters={'child_frame': ns + '/base_link'})
-            else:
-                # otherwise publish ground truth as another link to get, well, ground truth
-                sl.node('pose_to_tf',parameters={'child_frame': ns+'/base_link_gt'})
-
-            sl.create_gz_bridge(bridges)
     
     return sl.launch_description()
 
