@@ -19,6 +19,33 @@ Drone models by [OpenRobotics on Gazebo Fuel](https://app.gazebosim.org/OpenRobo
 - ROS2 Kilted
 - Gazebo Harmonic
 
+# Installation
+1. Be sure to have ROS2 Jazzy and Gazebo Harmonic installed and configured on your system.
+2. Clone the repository into your ROS2 workspace:
+   ```bash
+   cd ~/ros2_ws/src
+   git clone https://github.com/pisteuralpin/simple_drone_gazebo.git
+    ```
+3. Clone simple_drone_description package if not already done:
+   ```bash
+   git clone https://github.com/pisteuralpin/simple_drone_description.git
+   ```
+4. Clone simple_launch, thruster_manager and pose_to_tf packages if not already done:
+   ```bash
+   git clone https://github.com/oKermorgant/simple_launch.git
+   git clone https://github.com/CentraleNantesROV/thruster_manager.git
+   git clone https://github.com/oKermorgant/pose_to_tf.git
+   ```
+5. Build your ROS2 workspace:
+   ```bash
+   cd ~/ros2_ws
+   colcon build --symlink-install
+   ```
+6. Source your workspace:
+   ```bash
+   source ~/ros2_ws/install/setup.bash
+   ```
+
 # Usage
 To launch the Gazebo simulation, use the following command:
 ```bash
@@ -29,3 +56,4 @@ To spawn drones in the simulation, run the following command:
 ```bash
 ros2 launch simple_drone_gazebo drones.launch.py
 ```
+You can modify the number of drones and their initial positions in the `config/simulation.yaml` file.
